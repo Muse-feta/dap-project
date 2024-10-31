@@ -7,64 +7,103 @@ export async function POST(request: Request) {
   // Parse the data from the request body
   const formData = await request.json();
 
-  const {
-    fullName,
-    dateOfBirth,
-    gender,
-    dateOfAssessment,
-    referralSource,
-    nextSessionDateTime,
-    sessionNumber,
-    data,
-    assessment,
-    plan,
-  } = formData;
+  const { fullName, gender, sessionNumber, data, assessment, plan } = formData;
 
   // Construct the prompt for the OpenAI model
-  const prompt = `
+ const prompt = `
   Role:
-  You are a mental health professional tasked with generating a comprehensive DAP (Data, Assessment, Plan) note based on the information provided below.
-  
+  You are a mental health professional tasked with generating 10 unique DAP (Data, Assessment, Plan) notes. Each note should reflect slight variations in content to simulate observations across multiple sessions.
+
   Input:
   {
     "ClientInformation": {
       "FullName": "${fullName}",
-      "DateOfBirth": "${dateOfBirth}",
       "Gender": "${gender}",
-      "DateOfAssessment": "${dateOfAssessment}",
-      "ReferralSource": "${referralSource}",
-      "NextSessionDateTime": "${nextSessionDateTime}",
       "SessionNumber": "${sessionNumber}"
     },
-    "SessionNotes": {
+    "SessionNotesTemplate": {
       "Data": "${data}",
       "Assessment": "${assessment}",
       "Plan": "${plan}"
     }
   }
-  
+
   Task:
-  Generate a structured DAP note that follows this format:
-  
+  Generate 10 unique DAP notes in JSON format, each with slight variations for the fields "Data," "Assessment," and "Plan." Make sure the content is slightly different for each note to reflect session progress and variations.
+
   Output Format (JSON):
+  
   {
     "ClientInformation": {
       "FullName": "${fullName}",
-      "DateOfBirth": "${dateOfBirth}",
       "Gender": "${gender}",
-      "DateOfAssessment": "${dateOfAssessment}",
-      "ReferralSource": "${referralSource}",
-      "NextSessionDateTime": "${nextSessionDateTime}",
       "SessionNumber": "${sessionNumber}"
     },
-    "DAPNote": {
-      "Data": "${data}",
-      "Assessment": "${assessment}",
-      "Plan": "${plan}"
-    }
+    "DAPNotes": [
+      {
+          "NoteNumber": 1,
+          "Data": "${data} - unique observation with 3 paragraphs",
+          "Assessment": "${assessment} - unique assessment with 3 paragraphs",
+          "Plan": "${plan} - unique plan with 3 paragraphs"
+        },
+      {
+          "NoteNumber": 2,
+          "Data": "${data} - unique observation with 3 paragraphs",
+          "Assessment": "${assessment} - unique assessment with 3 paragraphs",
+          "Plan": "${plan} - unique plan with 3 paragraphs"
+        },
+      {
+          "NoteNumber": 3,
+          "Data": "${data} - unique observation with 3 paragraphs",
+          "Assessment": "${assessment} - unique assessment with 3 paragraphs",
+          "Plan": "${plan} - unique plan with 3 paragraphs"
+        },
+      {
+          "NoteNumber": 4,
+          "Data": "${data} - unique observation with 3 paragraphs",
+          "Assessment": "${assessment} - unique assessment with 3 paragraphs",
+          "Plan": "${plan} - unique plan with 3 paragraphs"
+        },
+      {
+          "NoteNumber": 5,
+          "Data": "${data} - unique observation with 3 paragraphs",
+          "Assessment": "${assessment} - unique assessment with 3 paragraphs",
+          "Plan": "${plan} - unique plan with 3 paragraphs"
+        },
+      {
+          "NoteNumber": 6,
+          "Data": "${data} - unique observation with 3 paragraphs",
+          "Assessment": "${assessment} - unique assessment with 3 paragraphs",
+          "Plan": "${plan} - unique plan with 3 paragraphs"
+        },
+      {
+          "NoteNumber": 7,
+          "Data": "${data} - unique observation with 3 paragraphs",
+          "Assessment": "${assessment} - unique assessment with 3 paragraphs",
+          "Plan": "${plan} - unique plan with 3 paragraphs"
+        },
+      {
+          "NoteNumber": 8,
+          "Data": "${data} - unique observation with 3 paragraphs",
+          "Assessment": "${assessment} - unique assessment with 3 paragraphs",
+          "Plan": "${plan} - unique plan with 3 paragraphs"
+        },
+      {
+          "NoteNumber": 9,
+          "Data": "${data} - unique observation with 3 paragraphs",
+          "Assessment": "${assessment} - unique assessment with 3 paragraphs",
+          "Plan": "${plan} - unique plan with 3 paragraphs"
+        },
+      {
+          "NoteNumber": 10,
+          "Data": "${data} - unique observation with 3 paragraphs",
+          "Assessment": "${assessment} - unique assessment with 3 paragraphs",
+          "Plan": "${plan} - unique plan with 3 paragraphs"
+        },
+    ]
   }
-  
-  Ensure that the output is in valid JSON format.
+
+  Ensure that the output is in valid JSON format and all session are same session session number ${sessionNumber}.
   `;
 
   // Make a call to the OpenAI API
@@ -84,7 +123,7 @@ export async function POST(request: Request) {
           },
           { role: "user", content: prompt },
         ],
-        max_tokens: 1000,
+        max_tokens: 2000,
         temperature: 0.7,
       }),
     });
@@ -93,7 +132,7 @@ export async function POST(request: Request) {
       const errorResponse = await response.json();
       console.error("OpenAI API error:", errorResponse);
       return NextResponse.json(
-        { error: "Failed to generate DAP note." },
+        { error: "Failed to generate DAP notes." },
         { status: 500 }
       );
     }
@@ -101,14 +140,14 @@ export async function POST(request: Request) {
     // Parse the response from OpenAI
     const result = await response.json();
     let generatedDAP =
-      result.choices?.[0]?.message?.content || "No DAP note generated.";
+      result.choices?.[0]?.message?.content || "No DAP notes generated.";
     generatedDAP = generatedDAP.replace(/[*#]/g, ""); // Clean up any markdown symbols
 
-    const parsedDAP = JSON.parse(generatedDAP); // Parse JSON-formatted DAP note
+    const parsedDAP = JSON.parse(generatedDAP); // Parse JSON-formatted DAP notes
     console.log("parsedDAP", parsedDAP);
     return NextResponse.json(parsedDAP);
   } catch (error) {
-    console.error("Error generating DAP note:", error);
+    console.error("Error generating DAP notes:", error);
     return NextResponse.json(
       { error: "Error processing the request" },
       { status: 500 }

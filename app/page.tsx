@@ -19,18 +19,14 @@ interface DAPNote {
 
 interface AssessmentData {
   ClientInformation: ClientInformation;
-  DAPNote: DAPNote;
+  DAPNotes: DAPNote[]; // Update to an array of DAPNotes
 }
 
 export default function DAPNoteGenerator() {
   // Define state for each input field
   const [formData, setFormData] = useState({
     fullName: "",
-    dateOfBirth: "",
     gender: "",
-    dateOfAssessment: "",
-    referralSource: "",
-    nextSessionDateTime: "",
     sessionNumber: "",
     data: "",
     assessment: "",
@@ -93,7 +89,6 @@ export default function DAPNoteGenerator() {
           DAP Note Generator
         </h1>
         <div className="bg-[#1B263B] shadow-lg rounded-lg p-10">
-          
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Client Information Section */}
             <div>
@@ -117,19 +112,6 @@ export default function DAPNoteGenerator() {
 
                 <div>
                   <label className="block text-gray-300 opacity-55 font-semibold">
-                    Date of Birth:
-                  </label>
-                  <input
-                    type="date"
-                    name="dateOfBirth"
-                    value={formData.dateOfBirth}
-                    onChange={handleChange}
-                    className="w-full bg-[#112B3C] text-white border border-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-gray-300 opacity-55 font-semibold">
                     Gender:
                   </label>
                   <select
@@ -143,46 +125,6 @@ export default function DAPNoteGenerator() {
                     <option value="female">Female</option>
                     <option value="other">Other</option>
                   </select>
-                </div>
-
-                <div>
-                  <label className="block text-gray-300 opacity-55 font-semibold">
-                    Date of Assessment:
-                  </label>
-                  <input
-                    type="date"
-                    name="dateOfAssessment"
-                    value={formData.dateOfAssessment}
-                    onChange={handleChange}
-                    className="w-full bg-[#112B3C] text-white border border-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                  />
-                </div>
-
-                <div className="lg:col-span-2">
-                  <label className="block text-gray-300 opacity-55 font-semibold">
-                    Referral Source:
-                  </label>
-                  <input
-                    type="text"
-                    name="referralSource"
-                    placeholder="Referral Source"
-                    value={formData.referralSource}
-                    onChange={handleChange}
-                    className="w-full bg-[#112B3C] text-white border border-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-gray-300 opacity-55 font-semibold">
-                    Next Session Date and Time:
-                  </label>
-                  <input
-                    type="datetime-local"
-                    name="nextSessionDateTime"
-                    value={formData.nextSessionDateTime}
-                    onChange={handleChange}
-                    className="w-full bg-[#112B3C] text-white border border-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                  />
                 </div>
 
                 <div>
@@ -248,7 +190,7 @@ export default function DAPNoteGenerator() {
           </form>
 
           {assessmentData && (
-            <div className="bg-[#1B263B] mt-10 shadow-lg rounded-lg  text-white">
+            <div className="bg-[#1B263B] mt-10 shadow-lg rounded-lg text-white">
               <h2 className="text-xl font-semibold mb-4 border-b-2 border-gray-600 py-3 text-center">
                 Assessment Results
               </h2>
@@ -260,26 +202,8 @@ export default function DAPNoteGenerator() {
                     {assessmentData.ClientInformation.FullName}
                   </p>
                   <p className="mb-2">
-                    <span className=" font-extrabold">Date of Birth: </span>
-                    {assessmentData.ClientInformation.DateOfBirth}
-                  </p>
-                  <p className="mb-2">
                     <span className=" font-extrabold">Gender: </span>{" "}
                     {assessmentData.ClientInformation.Gender}
-                  </p>
-                  <p className="mb-2">
-                    <span className=" font-extrabold">
-                      Date of Assessment:{" "}
-                    </span>
-                    {assessmentData.ClientInformation.DateOfAssessment}
-                  </p>
-                  <p className="mb-2">
-                    <span className=" font-extrabold">Referral Source: </span>{" "}
-                    {assessmentData.ClientInformation.ReferralSource}
-                  </p>
-                  <p className="mb-2">
-                    <span className=" font-extrabold">Next Session Date: </span>
-                    {assessmentData.ClientInformation.NextSessionDateTime}
                   </p>
                   <p className="mb-2">
                     <span className=" font-extrabold">Session Number: </span>
@@ -287,26 +211,32 @@ export default function DAPNoteGenerator() {
                   </p>
                 </div>
 
-                <div>
-                  <h3 className="text-xl font-bold border-b-2 border-gray-600 py-3 mb-3">
-                    DAP Note
-                  </h3>
-                  <p>
-                    <strong className=" font-extrabold text-xl">Data:</strong>
-                    <br /> {assessmentData.DAPNote.Data}
-                  </p>
-                  <p>
-                    <strong className=" font-extrabold text-xl">
-                      Assessment:
-                    </strong>{" "}
-                    <br />
-                    {assessmentData.DAPNote.Assessment}
-                  </p>
-                  <p>
-                    <strong className=" font-extrabold text-xl">Plan:</strong>{" "} <br />
-                    {assessmentData.DAPNote.Plan}
-                  </p>
-                </div>
+                {/* Mapping through DAPNotes to display each note */}
+                {assessmentData.DAPNotes.map((note, index) => (
+                  <div
+                    key={index}
+                    className="mt-6 border-t border-gray-600 pt-4"
+                  >
+                    <h3 className="text-xl font-bold my-3">Note {index + 1}</h3>
+                    <p>
+                      <strong className=" font-extrabold text-xl">Data:</strong>
+                      <br />
+                      {note.Data}
+                    </p>
+                    <p>
+                      <strong className=" font-extrabold text-xl">
+                        Assessment:
+                      </strong>
+                      <br />
+                      {note.Assessment}
+                    </p>
+                    <p>
+                      <strong className=" font-extrabold text-xl">Plan:</strong>
+                      <br />
+                      {note.Plan}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           )}
