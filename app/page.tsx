@@ -192,7 +192,7 @@ export default function DAPNoteGenerator() {
           {assessmentData && (
             <div className="bg-[#1B263B] mt-10 shadow-lg rounded-lg text-white">
               <h2 className="text-xl font-semibold mb-4 border-b-2 border-gray-600 py-3 text-center">
-                Assessment Results
+                Client Case Summary
               </h2>
               <div className="space-y-4">
                 <div>

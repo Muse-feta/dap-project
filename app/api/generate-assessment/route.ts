@@ -10,7 +10,7 @@ export async function POST(request: Request) {
   const { fullName, gender, sessionNumber, data, assessment, plan } = formData;
 
   // Construct the prompt for the OpenAI model
- const prompt = `
+const prompt = `
   Role:
   You are a mental health professional tasked with generating 10 unique DAP (Data, Assessment, Plan) notes. Each note should reflect slight variations in content to simulate observations across multiple sessions.
 
@@ -42,69 +42,70 @@ export async function POST(request: Request) {
     "DAPNotes": [
       {
           "NoteNumber": 1,
-          "Data": "${data} - unique observation with 3 paragraphs",
-          "Assessment": "${assessment} - unique assessment with 3 paragraphs",
-          "Plan": "${plan} - unique plan with 3 paragraphs"
+          "Data": "${data} - unique observation with 5 paragraphs",
+          "Assessment": "${assessment} - unique assessment with 5 paragraphs",
+          "Plan": "${plan} - unique plan with 5 paragraphs"
         },
       {
           "NoteNumber": 2,
-          "Data": "${data} - unique observation with 3 paragraphs",
-          "Assessment": "${assessment} - unique assessment with 3 paragraphs",
-          "Plan": "${plan} - unique plan with 3 paragraphs"
+          "Data": "${data} - unique observation with 5 paragraphs",
+          "Assessment": "${assessment} - unique assessment with 5 paragraphs",
+          "Plan": "${plan} - unique plan with 5 paragraphs"
         },
       {
           "NoteNumber": 3,
-          "Data": "${data} - unique observation with 3 paragraphs",
-          "Assessment": "${assessment} - unique assessment with 3 paragraphs",
-          "Plan": "${plan} - unique plan with 3 paragraphs"
+          "Data": "${data} - unique observation with 5 paragraphs",
+          "Assessment": "${assessment} - unique assessment with 5 paragraphs",
+          "Plan": "${plan} - unique plan with 5 paragraphs"
         },
       {
           "NoteNumber": 4,
-          "Data": "${data} - unique observation with 3 paragraphs",
-          "Assessment": "${assessment} - unique assessment with 3 paragraphs",
-          "Plan": "${plan} - unique plan with 3 paragraphs"
+          "Data": "${data} - unique observation with 5 paragraphs",
+          "Assessment": "${assessment} - unique assessment with 5 paragraphs",
+          "Plan": "${plan} - unique plan with 5 paragraphs"
         },
       {
           "NoteNumber": 5,
-          "Data": "${data} - unique observation with 3 paragraphs",
-          "Assessment": "${assessment} - unique assessment with 3 paragraphs",
-          "Plan": "${plan} - unique plan with 3 paragraphs"
+          "Data": "${data} - unique observation with 5 paragraphs",
+          "Assessment": "${assessment} - unique assessment with 5 paragraphs",
+          "Plan": "${plan} - unique plan with 5 paragraphs"
         },
       {
           "NoteNumber": 6,
-          "Data": "${data} - unique observation with 3 paragraphs",
-          "Assessment": "${assessment} - unique assessment with 3 paragraphs",
-          "Plan": "${plan} - unique plan with 3 paragraphs"
+          "Data": "${data} - unique observation with 5 paragraphs",
+          "Assessment": "${assessment} - unique assessment with 5 paragraphs",
+          "Plan": "${plan} - unique plan with 5 paragraphs"
         },
       {
           "NoteNumber": 7,
-          "Data": "${data} - unique observation with 3 paragraphs",
-          "Assessment": "${assessment} - unique assessment with 3 paragraphs",
-          "Plan": "${plan} - unique plan with 3 paragraphs"
+          "Data": "${data} - unique observation with 5 paragraphs",
+          "Assessment": "${assessment} - unique assessment with 5 paragraphs",
+          "Plan": "${plan} - unique plan with 5 paragraphs"
         },
       {
           "NoteNumber": 8,
-          "Data": "${data} - unique observation with 3 paragraphs",
-          "Assessment": "${assessment} - unique assessment with 3 paragraphs",
-          "Plan": "${plan} - unique plan with 3 paragraphs"
+          "Data": "${data} - unique observation with 5 paragraphs",
+          "Assessment": "${assessment} - unique assessment with 5 paragraphs",
+          "Plan": "${plan} - unique plan with 5 paragraphs"
         },
       {
           "NoteNumber": 9,
-          "Data": "${data} - unique observation with 3 paragraphs",
-          "Assessment": "${assessment} - unique assessment with 3 paragraphs",
-          "Plan": "${plan} - unique plan with 3 paragraphs"
+          "Data": "${data} - unique observation with 5 paragraphs",
+          "Assessment": "${assessment} - unique assessment with 5 paragraphs",
+          "Plan": "${plan} - unique plan with 5 paragraphs"
         },
       {
           "NoteNumber": 10,
-          "Data": "${data} - unique observation with 3 paragraphs",
-          "Assessment": "${assessment} - unique assessment with 3 paragraphs",
-          "Plan": "${plan} - unique plan with 3 paragraphs"
-        },
+          "Data": "${data} - unique observation with 5 paragraphs",
+          "Assessment": "${assessment} - unique assessment with 5 paragraphs",
+          "Plan": "${plan} - unique plan with 5 paragraphs"
+        }
     ]
   }
 
-  Ensure that the output is in valid JSON format and all session are same session session number ${sessionNumber}.
-  `;
+  Ensure that the output is in valid JSON format and all sessions are numbered as "${sessionNumber}".
+`;
+
 
   // Make a call to the OpenAI API
   try {
@@ -123,8 +124,8 @@ export async function POST(request: Request) {
           },
           { role: "user", content: prompt },
         ],
-        max_tokens: 2000,
-        temperature: 0.7,
+        max_tokens: 3000,
+        temperature: 0.5,
       }),
     });
 
