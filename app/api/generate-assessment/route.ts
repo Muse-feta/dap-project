@@ -29,81 +29,201 @@ const prompt = `
   }
 
   Task:
-  Generate 10 unique DAP notes in JSON format, each with slight variations for the fields "Data," "Assessment," and "Plan." Make sure the content is slightly different for each note to reflect session progress and variations.
+  Generate 10 unique DAP notes in JSON format, You are a mental health professional tasked with generating 10 unique DAP (Data, Assessment, Plan) notes. Each note should reflect gradual progress or minor variations across sessions. Ensure each DAP note has at least 5 detailed paragraphs per section ("Data," "Assessment," and "Plan").
 
   Output Format (JSON):
   
   {
-    "ClientInformation": {
-      "FullName": "${fullName}",
-      "Gender": "${gender}",
-      "SessionNumber": "${sessionNumber}"
-    },
-    "DAPNotes": [
-      {
-          "NoteNumber": 1,
-          "Data": "${data} - unique observation with 5 paragraphs",
-          "Assessment": "${assessment} - unique assessment with 5 paragraphs",
-          "Plan": "${plan} - unique plan with 5 paragraphs"
-        },
-      {
-          "NoteNumber": 2,
-          "Data": "${data} - unique observation with 5 paragraphs",
-          "Assessment": "${assessment} - unique assessment with 5 paragraphs",
-          "Plan": "${plan} - unique plan with 5 paragraphs"
-        },
-      {
-          "NoteNumber": 3,
-          "Data": "${data} - unique observation with 5 paragraphs",
-          "Assessment": "${assessment} - unique assessment with 5 paragraphs",
-          "Plan": "${plan} - unique plan with 5 paragraphs"
-        },
-      {
-          "NoteNumber": 4,
-          "Data": "${data} - unique observation with 5 paragraphs",
-          "Assessment": "${assessment} - unique assessment with 5 paragraphs",
-          "Plan": "${plan} - unique plan with 5 paragraphs"
-        },
-      {
-          "NoteNumber": 5,
-          "Data": "${data} - unique observation with 5 paragraphs",
-          "Assessment": "${assessment} - unique assessment with 5 paragraphs",
-          "Plan": "${plan} - unique plan with 5 paragraphs"
-        },
-      {
-          "NoteNumber": 6,
-          "Data": "${data} - unique observation with 5 paragraphs",
-          "Assessment": "${assessment} - unique assessment with 5 paragraphs",
-          "Plan": "${plan} - unique plan with 5 paragraphs"
-        },
-      {
-          "NoteNumber": 7,
-          "Data": "${data} - unique observation with 5 paragraphs",
-          "Assessment": "${assessment} - unique assessment with 5 paragraphs",
-          "Plan": "${plan} - unique plan with 5 paragraphs"
-        },
-      {
-          "NoteNumber": 8,
-          "Data": "${data} - unique observation with 5 paragraphs",
-          "Assessment": "${assessment} - unique assessment with 5 paragraphs",
-          "Plan": "${plan} - unique plan with 5 paragraphs"
-        },
-      {
-          "NoteNumber": 9,
-          "Data": "${data} - unique observation with 5 paragraphs",
-          "Assessment": "${assessment} - unique assessment with 5 paragraphs",
-          "Plan": "${plan} - unique plan with 5 paragraphs"
-        },
-      {
-          "NoteNumber": 10,
-          "Data": "${data} - unique observation with 5 paragraphs",
-          "Assessment": "${assessment} - unique assessment with 5 paragraphs",
-          "Plan": "${plan} - unique plan with 5 paragraphs"
-        }
+  "ClientInformation": {
+    "FullName": "${fullName}",
+    "Gender": "${gender}",
+    "SessionNumber": "${sessionNumber}"
+  },
+  "DAPNotes": [
+    {
+      "NoteNumber": 1,
+      "Data": "${data} - 9+ unique paragraphs reflecting initial observations, client background, presenting issues, and rapport building in session 1.",
+      "Assessment": "${assessment} - 9+ unique paragraphs detailing initial assessment, identified goals, strengths, challenges, and client expectations.",
+      "Plan": {
+    "Plan": "${plan} - Adjusted strategies to support ACT (Acceptance and Commitment Therapy), mindfulness, and boundary-setting exercises based on client feedback.",
+    "GoalsAchieved": [
+      "Reduced worry and anxious symptoms.",
+      "Increased confidence and comfort with setting and maintaining boundaries."
+    ],
+    "NextSteps": [
+      "Introduce forgiveness and self-compassion exercises to encourage acceptance and resilience.",
+      "Continue reinforcing ACT practices, introducing techniques for handling difficult emotions with greater resilience.",
+      "Plan to add cognitive restructuring exercises if necessary, based on client's feedback.",
+      "Schedule another follow-up to assess ongoing progress and discuss any emerging challenges."
     ]
   }
+    },
+    {
+      "NoteNumber": 2,
+      "Data": "${data} - 9+ unique paragraphs reflecting follow-up observations, rapport improvement, and changes since session 1.",
+      "Assessment": "${assessment} - 9+ unique paragraphs updating assessment with focus on emerging patterns, initial progress, and identified areas needing further attention.",
+      "Plan": {
+    "Plan": "${plan} - Adjusted strategies to support ACT (Acceptance and Commitment Therapy), mindfulness, and boundary-setting exercises based on client feedback.",
+    "GoalsAchieved": [
+      "Reduced worry and anxious symptoms.",
+      "Increased confidence and comfort with setting and maintaining boundaries."
+    ],
+    "NextSteps": [
+      "Introduce forgiveness and self-compassion exercises to encourage acceptance and resilience.",
+      "Continue reinforcing ACT practices, introducing techniques for handling difficult emotions with greater resilience.",
+      "Plan to add cognitive restructuring exercises if necessary, based on client's feedback.",
+      "Schedule another follow-up to assess ongoing progress and discuss any emerging challenges."
+    ]
+  }
+    },
+    {
+      "NoteNumber": 3,
+      "Data": "${data} - 9+ unique paragraphs highlighting observations of increased engagement, any new concerns, and client’s feedback on prior session strategies.",
+      "Assessment": "${assessment} - 9+ unique paragraphs expanding assessment on coping mechanisms, emotional response, and further clarifying treatment goals.",
+      "Plan": {
+    "Plan": "${plan} - Adjusted strategies to support ACT (Acceptance and Commitment Therapy), mindfulness, and boundary-setting exercises based on client feedback.",
+    "GoalsAchieved": [
+      "Reduced worry and anxious symptoms.",
+      "Increased confidence and comfort with setting and maintaining boundaries."
+    ],
+    "NextSteps": [
+      "Introduce forgiveness and self-compassion exercises to encourage acceptance and resilience.",
+      "Continue reinforcing ACT practices, introducing techniques for handling difficult emotions with greater resilience.",
+      "Plan to add cognitive restructuring exercises if necessary, based on client's feedback.",
+      "Schedule another follow-up to assess ongoing progress and discuss any emerging challenges."
+    ]
+  }
+    },
+    {
+      "NoteNumber": 4,
+      "Data": "${data} - 9+ unique paragraphs covering client’s response to interventions, current mood, and any changes in presenting issues or life events.",
+      "Assessment": "${assessment} - 9+ unique paragraphs evaluating strengths, progress in coping strategies, and identifying any persisting barriers.",
+      "Plan": {
+    "Plan": "${plan} - Adjusted strategies to support ACT (Acceptance and Commitment Therapy), mindfulness, and boundary-setting exercises based on client feedback.",
+    "GoalsAchieved": [
+      "Reduced worry and anxious symptoms.",
+      "Increased confidence and comfort with setting and maintaining boundaries."
+    ],
+    "NextSteps": [
+      "Introduce forgiveness and self-compassion exercises to encourage acceptance and resilience.",
+      "Continue reinforcing ACT practices, introducing techniques for handling difficult emotions with greater resilience.",
+      "Plan to add cognitive restructuring exercises if necessary, based on client's feedback.",
+      "Schedule another follow-up to assess ongoing progress and discuss any emerging challenges."
+    ]
+  }
+    },
+    {
+      "NoteNumber": 5,
+      "Data": "${data} - 9+ unique paragraphs summarizing client’s engagement level, interaction with previous strategies, and personal reflections shared.",
+      "Assessment": "${assessment} - 9+ unique paragraphs highlighting mid-therapy evaluation, notable progress, and potential adjustments to long-term goals.",
+      "Plan": {
+    "Plan": "${plan} - Adjusted strategies to support ACT (Acceptance and Commitment Therapy), mindfulness, and boundary-setting exercises based on client feedback.",
+    "GoalsAchieved": [
+      "Reduced worry and anxious symptoms.",
+      "Increased confidence and comfort with setting and maintaining boundaries."
+    ],
+    "NextSteps": [
+      "Introduce forgiveness and self-compassion exercises to encourage acceptance and resilience.",
+      "Continue reinforcing ACT practices, introducing techniques for handling difficult emotions with greater resilience.",
+      "Plan to add cognitive restructuring exercises if necessary, based on client's feedback.",
+      "Schedule another follow-up to assess ongoing progress and discuss any emerging challenges."
+    ]
+  }
+    },
+    {
+      "NoteNumber": 6,
+      "Data": "${data} - 9+ unique paragraphs indicating client’s improvements, any resistance faced, and overall motivation.",
+      "Assessment": "${assessment} - 9+ unique paragraphs analyzing client’s coping with stressors, resilience, and adaptability to therapeutic techniques.",
+      "Plan": {
+    "Plan": "${plan} - Adjusted strategies to support ACT (Acceptance and Commitment Therapy), mindfulness, and boundary-setting exercises based on client feedback.",
+    "GoalsAchieved": [
+      "Reduced worry and anxious symptoms.",
+      "Increased confidence and comfort with setting and maintaining boundaries."
+    ],
+    "NextSteps": [
+      "Introduce forgiveness and self-compassion exercises to encourage acceptance and resilience.",
+      "Continue reinforcing ACT practices, introducing techniques for handling difficult emotions with greater resilience.",
+      "Plan to add cognitive restructuring exercises if necessary, based on client's feedback.",
+      "Schedule another follow-up to assess ongoing progress and discuss any emerging challenges."
+    ]
+  }
+    },
+    {
+      "NoteNumber": 7,
+      "Data": "${data} - 9+ unique paragraphs reflecting noticeable positive changes, engagement level, and new insights from client feedback.",
+      "Assessment": "${assessment} - 9+ unique paragraphs focusing on client’s internalization of strategies, self-awareness growth, and any areas for further reinforcement.",
+      "Plan": {
+    "Plan": "${plan} - Adjusted strategies to support ACT (Acceptance and Commitment Therapy), mindfulness, and boundary-setting exercises based on client feedback.",
+    "GoalsAchieved": [
+      "Reduced worry and anxious symptoms.",
+      "Increased confidence and comfort with setting and maintaining boundaries."
+    ],
+    "NextSteps": [
+      "Introduce forgiveness and self-compassion exercises to encourage acceptance and resilience.",
+      "Continue reinforcing ACT practices, introducing techniques for handling difficult emotions with greater resilience.",
+      "Plan to add cognitive restructuring exercises if necessary, based on client's feedback.",
+      "Schedule another follow-up to assess ongoing progress and discuss any emerging challenges."
+    ]
+  }
+    },
+    {
+      "NoteNumber": 8,
+      "Data": "${data} - 9+ unique paragraphs showing client’s development in self-reflection, increased emotional regulation, and any setbacks faced.",
+      "Assessment": "${assessment} - 9+ unique paragraphs evaluating resilience, increased insight, and reviewing adjustments made in response to challenges.",
+      "Plan": {
+    "Plan": "${plan} - Adjusted strategies to support ACT (Acceptance and Commitment Therapy), mindfulness, and boundary-setting exercises based on client feedback.",
+    "GoalsAchieved": [
+      "Reduced worry and anxious symptoms.",
+      "Increased confidence and comfort with setting and maintaining boundaries."
+    ],
+    "NextSteps": [
+      "Introduce forgiveness and self-compassion exercises to encourage acceptance and resilience.",
+      "Continue reinforcing ACT practices, introducing techniques for handling difficult emotions with greater resilience.",
+      "Plan to add cognitive restructuring exercises if necessary, based on client's feedback.",
+      "Schedule another follow-up to assess ongoing progress and discuss any emerging challenges."
+    ]
+  }
+    },
+    {
+      "NoteNumber": 9,
+      "Data": "${data} - 9+ unique paragraphs describing consistent application of strategies, client’s self-reported progress, and reflections on personal growth.",
+      "Assessment": "${assessment} - 9+ unique paragraphs assessing readiness for reduced intervention, confidence in managing symptoms, and any areas to solidify.",
+      "Plan": {
+    "Plan": "${plan} - Adjusted strategies to support ACT (Acceptance and Commitment Therapy), mindfulness, and boundary-setting exercises based on client feedback.",
+    "GoalsAchieved": [
+      "Reduced worry and anxious symptoms.",
+      "Increased confidence and comfort with setting and maintaining boundaries."
+    ],
+    "NextSteps": [
+      "Introduce forgiveness and self-compassion exercises to encourage acceptance and resilience.",
+      "Continue reinforcing ACT practices, introducing techniques for handling difficult emotions with greater resilience.",
+      "Plan to add cognitive restructuring exercises if necessary, based on client's feedback.",
+      "Schedule another follow-up to assess ongoing progress and discuss any emerging challenges."
+    ]
+  }
+    },
+    {
+      "NoteNumber": 10,
+      "Data": "${data} - 9+ unique paragraphs reflecting final session observations, client’s reflections on therapy journey, and summary of changes.",
+      "Assessment": "${assessment} - 9+ unique paragraphs providing a conclusive assessment, summarizing progress, and readiness for discharge or continued self-management.",
+      "Plan": {
+    "Plan": "${plan} - Adjusted strategies to support ACT (Acceptance and Commitment Therapy), mindfulness, and boundary-setting exercises based on client feedback.",
+    "GoalsAchieved": [
+      "Reduced worry and anxious symptoms.",
+      "Increased confidence and comfort with setting and maintaining boundaries."
+    ],
+    "NextSteps": [
+      "Introduce forgiveness and self-compassion exercises to encourage acceptance and resilience.",
+      "Continue reinforcing ACT practices, introducing techniques for handling difficult emotions with greater resilience.",
+      "Plan to add cognitive restructuring exercises if necessary, based on client's feedback.",
+      "Schedule another follow-up to assess ongoing progress and discuss any emerging challenges."
+    ]
+  }
+    }
+  ]
+}
 
-  Ensure that the output is in valid JSON format and all sessions are numbered as "${sessionNumber}".
+  Ensure that the output is in valid JSON format.
 `;
 
 
