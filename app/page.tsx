@@ -36,6 +36,7 @@ export default function DAPNoteGenerator() {
     data: "",
     assessment: "",
     plan: "",
+    additionalInstructions: "",
   });
 
   const [loading, setLoading] = useState(false); // Loading state
@@ -183,7 +184,16 @@ export default function DAPNoteGenerator() {
                 className="w-full bg-[#112B3C] text-white border border-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 h-48"
               ></textarea>
 
-              
+              <label className="block text-gray-300 opacity-55 font-semibold">
+                Additional Instructions:
+              </label>
+              <textarea
+                name="additionalInstructions"
+                placeholder="Enter Additional Instructions here..."
+                value={formData.additionalInstructions}
+                onChange={handleChange}
+                className="w-full bg-[#112B3C] text-white border border-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 h-48"
+              ></textarea>
             </div>
 
             {/* Submit Button */}
@@ -196,7 +206,7 @@ export default function DAPNoteGenerator() {
             </button>
           </form>
 
-            {assessmentData && (
+          {assessmentData && (
             <div className="bg-[#1B263B] mt-10 shadow-lg rounded-lg text-white">
               <h2 className="text-xl font-semibold mb-4 border-b-2 border-gray-600 py-3 text-center">
                 Client Case Summary
@@ -205,44 +215,64 @@ export default function DAPNoteGenerator() {
                 <div>
                   <h3 className="text-xl font-bold my-3">Client Information</h3>
                   <p className="mb-2">
-                    <span className="font-extrabold">Full Name:</span> {assessmentData.ClientInformation.FullName}
+                    <span className="font-extrabold">Full Name:</span>{" "}
+                    {assessmentData.ClientInformation.FullName}
                   </p>
                   <p className="mb-2">
-                    <span className="font-extrabold">Gender:</span> {assessmentData.ClientInformation.Gender}
+                    <span className="font-extrabold">Gender:</span>{" "}
+                    {assessmentData.ClientInformation.Gender}
                   </p>
                   <p className="mb-2">
-                    <span className="font-extrabold">Session Number:</span> {assessmentData.ClientInformation.SessionNumber}
+                    <span className="font-extrabold">Session Number:</span>{" "}
+                    {assessmentData.ClientInformation.SessionNumber}
                   </p>
                 </div>
 
                 {/* Displaying DAP Notes */}
                 {assessmentData.DAPNotes.map((note, index) => (
-                  <div key={index} className="mt-6 border-t border-gray-600 pt-4">
-                    <h3 className="text-xl font-bold my-3">Note {note.NoteNumber}</h3>
+                  <div
+                    key={index}
+                    className="mt-6 border-t border-gray-600 pt-4"
+                  >
+                    <h3 className="text-xl font-bold my-3">
+                      Note {note.NoteNumber}
+                    </h3>
                     <p>
-                      <strong className="font-extrabold text-xl">Data:</strong><br />{note.Data}
+                      <strong className="font-extrabold text-xl">Data:</strong>
+                      <br />
+                      {note.Data}
                     </p>
                     <p>
-                      <strong className="font-extrabold text-xl">Assessment:</strong><br />{note.Assessment}
+                      <strong className="font-extrabold text-xl">
+                        Assessment:
+                      </strong>
+                      <br />
+                      {note.Assessment}
                     </p>
                     <p>
-                      <strong className="font-extrabold text-xl">Plan:</strong><br />
+                      <strong className="font-extrabold text-xl">Plan:</strong>
+                      <br />
                       {note.Plan.Plan}
                     </p>
                     <p>
-  <strong className="font-extrabold text-sm">Goals Achieved:</strong>
-  <ul className="list-disc list-inside">
-    {Array.isArray(note.Plan.GoalsAchieved) && note.Plan.GoalsAchieved.length > 0 ? (
-      note.Plan.GoalsAchieved.map((goal, idx) => (
-        <li key={idx}>{goal}</li>
-      ))
-    ) : (
-      <li>No goals achieved listed</li> // Optional fallback message
-    )}
-  </ul>
-</p>
+                      <strong className="font-extrabold text-sm">
+                        Goals Achieved:
+                      </strong>
+                      <ul className="list-disc list-inside">
+                        {Array.isArray(note.Plan.GoalsAchieved) &&
+                        note.Plan.GoalsAchieved.length > 0 ? (
+                          note.Plan.GoalsAchieved.map((goal, idx) => (
+                            <li key={idx}>{goal}</li>
+                          ))
+                        ) : (
+                          <li>No goals achieved listed</li> // Optional fallback message
+                        )}
+                      </ul>
+                    </p>
                     <p>
-                      <strong className="font-extrabold text-sm">Next Steps:</strong>
+                      <strong className="font-extrabold text-sm">
+                        Next Steps:
+                      </strong>
                       <ul className="list-disc list-inside">
                         {note.Plan.NextSteps.map((step, idx) => (
                           <li key={idx}>{step}</li>

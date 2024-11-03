@@ -7,12 +7,23 @@ export async function POST(request: Request) {
   // Parse the data from the request body
   const formData = await request.json();
 
-  const { fullName, gender, sessionNumber, data, assessment, plan } = formData;
+  const {
+    fullName,
+    gender,
+    sessionNumber,
+    data,
+    assessment,
+    plan,
+    additionalInstructions,
+  } = formData;
 
   // Construct the prompt for the OpenAI model
 const prompt = `
   Role:
   You are a mental health professional tasked with generating 10 unique DAP (Data, Assessment, Plan) notes. Each note should reflect slight variations in content to simulate observations across multiple sessions.
+
+    Additional Instructions:
+    ${additionalInstructions || ""}
 
   Input:
   {
@@ -237,7 +248,8 @@ const prompt = `
   ]
 }
 
-  Ensure that the output is in valid JSON format.
+  Ensure that the output is in valid JSON format. and Ensure follow this ${
+    additionalInstructions || ""} instructions.
 `;
 
 
