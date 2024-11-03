@@ -24,7 +24,21 @@ const prompt = `
     "SessionNotesTemplate": {
       "Data": "${data}",
       "Assessment": "${assessment}",
-      "Plan": "${plan}"
+          "SessionNotesTemplate": {
+      "Data": "${data}",
+      "Assessment": "${assessment}",
+      "Plan": {
+        "Strategies": "Outline specific therapeutic techniques employed, such as ACT (Acceptance and Commitment Therapy), CBT (Cognitive Behavioral Therapy), or mindfulness exercises.",
+        "GoalsAchieved": [
+          "List measurable outcomes observed in this session, reflecting gradual progress or changes (e.g., reduced anxiety symptoms, improved boundary-setting, enhanced self-awareness)."
+        ],
+        "NextSteps": [
+          "Provide actionable steps for the next session, including any modifications or new interventions based on client’s feedback or observed progress (e.g., incorporating self-compassion exercises, reinforcing current techniques, introducing cognitive restructuring if necessary).",
+          "Highlight any follow-up actions, such as scheduling assessments or introducing new tools as the client progresses."
+        ]
+      }
+    }
+  }
     }
   }
 
