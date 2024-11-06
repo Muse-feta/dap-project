@@ -1,4 +1,5 @@
 "use client";
+import { Toaster, toast } from "sonner";
 import React, { useState } from "react";
 
 interface ClientInformation {
@@ -33,6 +34,7 @@ export default function DAPNoteGenerator() {
     fullName: "",
     gender: "",
     sessionNumber: "",
+    modelType: "",
     data: "",
     assessment: "",
     plan: "",
@@ -76,13 +78,22 @@ export default function DAPNoteGenerator() {
       }
 
       const data = await response.json();
-      setAssessmentData(data); // Store response data
-      console.log("data", data);
+
+      if (data.error.code === "insufficient_quota") {
+        toast.error(
+          "You exceeded your current quota, please check your plan and billing details."
+        );
+        setAssessmentData(null);
+      }else{
+        setAssessmentData(data);
+      }
+      console.log(data.error.code);
+ 
 
       // Navigate to results page if needed
       // router.push("/assessment-results");
     } catch (error) {
-      console.error("Error submitting the form:", error);
+      console.log(error);
     } finally {
       setLoading(false); // End loading
     }
@@ -145,6 +156,23 @@ export default function DAPNoteGenerator() {
                     onChange={handleChange}
                     className="w-full bg-[#112B3C] text-white border border-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                   />
+                </div>
+
+                <div>
+                  <label className="block text-gray-300 opacity-55 font-semibold">
+                    Model Type:
+                  </label>
+                  <select
+                    name="modelType"
+                    value={formData.modelType}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-[#112B3C] text-white border border-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                  >
+                    <option value="">Select Model</option>
+                    <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                    <option value="gpt-4">GPT-4</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -229,7 +257,7 @@ export default function DAPNoteGenerator() {
                 </div>
 
                 {/* Displaying DAP Notes */}
-                {assessmentData.DAPNotes.map((note, index) => (
+                {assessmentData.DAPNotes?.map((note, index) => (
                   <div
                     key={index}
                     className="mt-6 border-t border-gray-600 pt-4"
@@ -259,8 +287,8 @@ export default function DAPNoteGenerator() {
                         Goals Achieved:
                       </strong>
                       <ul className="list-disc list-inside">
-                        {Array.isArray(note.Plan.GoalsAchieved) &&
-                        note.Plan.GoalsAchieved.length > 0 ? (
+                        {Array.isArray(note.Plan?.GoalsAchieved) &&
+                        note.Plan.GoalsAchieved?.length > 0 ? (
                           note.Plan.GoalsAchieved.map((goal, idx) => (
                             <li key={idx}>{goal}</li>
                           ))
@@ -274,7 +302,7 @@ export default function DAPNoteGenerator() {
                         Next Steps:
                       </strong>
                       <ul className="list-disc list-inside">
-                        {note.Plan.NextSteps.map((step, idx) => (
+                        {note.Plan.NextSteps?.map((step, idx) => (
                           <li key={idx}>{step}</li>
                         ))}
                       </ul>
@@ -286,6 +314,7 @@ export default function DAPNoteGenerator() {
           )}
         </div>
       </div>
+      <Toaster position="top-center" richColors />
     </div>
   );
 }

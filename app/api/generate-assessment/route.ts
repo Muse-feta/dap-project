@@ -6,6 +6,7 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   // Parse the data from the request body
   const formData = await request.json();
+  console.log(formData)
 
   const {
     fullName,
@@ -15,6 +16,7 @@ export async function POST(request: Request) {
     assessment,
     plan,
     additionalInstructions,
+    modelType,
   } = formData;
 
   // Construct the prompt for the OpenAI model
@@ -251,7 +253,7 @@ const prompt = `
   Ensure that the output is in valid JSON format. and Ensure follow this ${
     additionalInstructions || ""} instructions.
 `;
-
+  const model = modelType || "gpt-3.5-turbo";
 
   // Make a call to the OpenAI API
   try {
@@ -262,7 +264,7 @@ const prompt = `
         Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "gpt-4",
+        model: model,
         messages: [
           {
             role: "system",
@@ -278,9 +280,7 @@ const prompt = `
     if (!response.ok) {
       const errorResponse = await response.json();
       console.error("OpenAI API error:", errorResponse);
-      return NextResponse.json(
-        { error: "Failed to generate DAP notes." },
-        { status: 500 }
+      return NextResponse.json(errorResponse
       );
     }
 
