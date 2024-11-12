@@ -78,16 +78,16 @@ export default function DAPNoteGenerator() {
       }
 
       const data = await response.json();
-
+      console.log(data)
+setAssessmentData(data);
       if (data.error.code === "insufficient_quota") {
         toast.error(
           "You exceeded your current quota, please check your plan and billing details."
         );
         setAssessmentData(null);
-      }else{
-        setAssessmentData(data);
       }
       console.log(data.error.code);
+      
  
 
       // Navigate to results page if needed
@@ -98,7 +98,7 @@ export default function DAPNoteGenerator() {
       setLoading(false); // End loading
     }
   };
-
+console.log(assessmentData);
   return (
     <div className="min-h-screen bg-[#0D1B2A] flex items-center justify-center p-6">
       <div className="w-full max-w-3xl">
@@ -123,6 +123,7 @@ export default function DAPNoteGenerator() {
                     placeholder="Full Name"
                     value={formData.fullName}
                     onChange={handleChange}
+                    required
                     className="w-full bg-[#112B3C] text-white border border-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                   />
                 </div>
@@ -135,6 +136,7 @@ export default function DAPNoteGenerator() {
                     name="gender"
                     value={formData.gender}
                     onChange={handleChange}
+                    required
                     className="w-full bg-[#112B3C] text-white border border-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                   >
                     <option value="">Select Gender</option>
@@ -154,6 +156,7 @@ export default function DAPNoteGenerator() {
                     placeholder="Session Number"
                     value={formData.sessionNumber}
                     onChange={handleChange}
+                    required
                     className="w-full bg-[#112B3C] text-white border border-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
                   />
                 </div>
@@ -187,6 +190,7 @@ export default function DAPNoteGenerator() {
                 placeholder="Enter data here..."
                 value={formData.data}
                 onChange={handleChange}
+                required
                 className="w-full bg-[#112B3C] text-white border border-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 h-48"
               ></textarea>
 
@@ -198,6 +202,7 @@ export default function DAPNoteGenerator() {
                 placeholder="Enter assessment here..."
                 value={formData.assessment}
                 onChange={handleChange}
+                required
                 className="w-full bg-[#112B3C] text-white border border-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 h-48"
               ></textarea>
 
@@ -209,6 +214,7 @@ export default function DAPNoteGenerator() {
                 placeholder="Enter plan here..."
                 value={formData.plan}
                 onChange={handleChange}
+                required
                 className="w-full bg-[#112B3C] text-white border border-gray-500 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 h-48"
               ></textarea>
 
